@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package com.genecrusher;
+
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+
+service UserDetailsService{
+  rpc createUser(UserCreationRequest) returns (UserCreationResponse){}
+  rpc updateUser(UserUpdateRequest) returns (UserUpdateResponse){}
+  rpc getUser(UserFetchRequest) returns (UserResponse){}
+}
+
+message UserCreationRequest{
+  string loginName = 1;
+  string password = 2;
+  string email = 3;
+  repeated string roles = 4;
+}
+
+message UserCreationResponse{
+  string loginName = 1;
+  string createdMessage = 2;
+  google.protobuf.Timestamp createdTime = 3;
+}
+
+message UserUpdateRequest{
+  string loginName = 1;
+  string email = 3;
+  repeated string roles = 4;
+}
+
+message UserUpdateResponse{
+  string loginName = 1;
+  string updatedMessage = 2;
+  google.protobuf.Timestamp updatedTime = 3;
+}
+
+
+message UserFetchRequest{
+  string loginName = 1;
+}
+
+
+message UserResponse{
+  string loginName = 1;
+  string email = 2;
+  repeated string roles = 3;
+  google.protobuf.Timestamp createdTime = 4;
+}
